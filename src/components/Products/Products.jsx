@@ -1,21 +1,21 @@
-import React from 'react';
-import styles from '../../styles/Products.module.css';
-import {Link} from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Products = ({title, products = [], amount, style = {}}) => {
+import styles from "../../styles/Products.module.css";
+
+const Products = ({ title, style = {}, products = [], amount }) => {
     const list = products.filter((_, i) => i < amount);
-
 
     return (
         <section className={styles.products} style={style}>
             {title && <h2>{title}</h2>}
 
             <div className={styles.list}>
-                {list.map(({id, images, title, category: {name: cat}, price,}) => (
+                {list.map(({ id, images, title, category: { name: cat }, price }) => (
                     <Link to={`/products/${id}`} key={id} className={styles.product}>
                         <div
                             className={styles.image}
-                            style={{backgroundImage: `url(${images[0]})`}}
+                            style={{ backgroundImage: `url(${images[0]})` }}
                         />
 
                         <div className={styles.wrapper}>
@@ -28,6 +28,7 @@ const Products = ({title, products = [], amount, style = {}}) => {
                                         {Math.floor(price * 0.8)}$
                                     </div>
                                 </div>
+
                                 <div className={styles.purchases}>
                                     {Math.floor(Math.random() * 20 + 1)} purchased
                                 </div>
@@ -37,7 +38,7 @@ const Products = ({title, products = [], amount, style = {}}) => {
                 ))}
             </div>
         </section>
-    )
+    );
 };
 
 export default Products;
