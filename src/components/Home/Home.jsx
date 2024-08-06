@@ -1,27 +1,26 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { filterByPrice } from "../../features/products/productsSlice";
+import { filterByPrice } from "../../features/products/productsSlice";
 
 import Banner from "../Banner/Banner";
 import Categories from "../Categories/Categories";
 import Poster from "../Poster/Poster";
 import Products from "../Products/Products";
 import products from "../Products/Products";
-import categories from "../Categories/Categories";
 
 const Home = () => {
-    // const dispatch = useDispatch();
-    // const {
-    //     products: { list, filtered },
-    //     categories,
-    // } = useSelector((state) => state);
+    const dispatch = useDispatch();
+    const {
+        products: { list, filtered },
+        categories,
+    } = useSelector((state) => state);
 
-    // useEffect(() => {
-    //     if (!list.length) return;
-    //
-    //     dispatch(filterByPrice(100));
-    // }, [dispatch, list.length]);
+    useEffect(() => {
+        if (!list.length) return;
+
+        dispatch(filterByPrice(100));
+    }, [dispatch, list.length]);
 
     return (
         <>
@@ -29,7 +28,7 @@ const Home = () => {
             <Products products={products.list} amount={5} title="Trending" />
             <Categories products={categories.list} amount={5} title="Worth seeing" />
             <Banner />
-            {/*<Products products={filtered} amount={5} title="Less than 100$" />*/}
+            <Products products={filtered} amount={5} title="Less than 100$" />
         </>
     );
 };
